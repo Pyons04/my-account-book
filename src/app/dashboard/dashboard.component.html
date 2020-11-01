@@ -1,0 +1,109 @@
+<app-toolbar></app-toolbar>
+<div class="window">
+
+  <div class="register-bar">
+    <app-register></app-register>
+  </div>
+
+<div class="main-content">
+  <mat-accordion>
+    <mat-expansion-panel  (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <b>Filter Your Transactions</b>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+      <form (ngSubmit)="filter()" >
+        <input [(ngModel)]="conditionByWords" type="text" name="name">
+        <button mat-button><input type="submit" value="Filter"></button>
+      </form>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+
+<form (ngSubmit)="updateTransaction()">
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <!-- 発生日 -->
+  <ng-container matColumnDef="realizationDate">
+    <th mat-header-cell *matHeaderCellDef> Realization Date </th>
+    <td mat-cell *matCellDef="let element">
+      <div *ngIf="(element?.key != isEditing?.key); else dateForm;">
+        {{ element.realizationDate | dateConverter}}
+      </div>
+      <ng-template #dateForm>
+        <input [(ngModel)]="realizationDateEdit" type="date" name="date">
+      </ng-template>
+    </td>
+  </ng-container>
+  <!-- 登録日 -->
+  <ng-container matColumnDef="createdDate">
+    <th mat-header-cell *matHeaderCellDef> Created Date </th>
+    <td mat-cell *matCellDef="let element">
+       {{element.createdDate | dateConverter}}
+    </td>
+  </ng-container>
+
+  <!-- 費用 -->
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef> price </th>
+    <td mat-cell *matCellDef="let element">
+        <div *ngIf="(element.key != isEditing?.key); else priceForm;">
+          {{element.price | currency:'JPY'}}
+        </div>
+        <ng-template #priceForm>
+          <input [(ngModel)]="priceEdit" type="number" name="price" ngDefaultControl>
+        </ng-template>
+    </td>
+  </ng-container>
+
+  <!-- 概要 -->
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef> Description </th>
+    <td mat-cell *matCellDef="let element">
+      <div *ngIf="(element.key != isEditing?.key); else descriptionForm;">
+        {{element.description}}
+      </div>
+      <ng-template #descriptionForm>
+        <input [(ngModel)]="descriptionEdit" type="text" name="description" ngDefaultControl>
+      </ng-template>
+    </td>
+  </ng-container>
+
+  <!-- カテゴリ -->
+  <ng-container matColumnDef="category">
+    <th mat-header-cell *matHeaderCellDef> Category </th>
+    <td mat-cell *matCellDef="let element">
+
+      <div *ngIf="(element.key != isEditing?.key); else categoryForm;">
+        {{ categoriesService.findBykey(element.categoryKey)?.name }}
+      </div>
+      <ng-template #categoryForm>
+        <select [(ngModel)]="categoryKeyEdit" name="categoryKey">
+          <option *ngFor="let item of categoriesService.categories" [value]="item.key">{{ item.name }}</option>
+        </select>
+      </ng-template>
+    </td>
+  </ng-container>
+
+  <!-- 編集ボタン -->
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef> Button </th>
+    <td mat-cell *matCellDef="let element">
+      <div *ngIf="(element.key != isEditing?.key); else submitOrCancel;">
+        <input type="button" (click)="edit(element.key)" value="編集">
+      </div>
+      <ng-template #submitOrCancel>
+        <input type="submit" value="Update">
+        <input type="button" (click)="editCancel()" value="Cancel">
+      </ng-template>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="['price', 'realizationDate', 'description', 'category', 'createdDate', 'edit']"></tr>
+  <tr mat-row *matRowDef="let row;  columns: ['price', 'realizationDate', 'description',  'category',  'createdDate', 'edit'];">
+  </tr>
+</table>
+</form>
+</div>
+</div>

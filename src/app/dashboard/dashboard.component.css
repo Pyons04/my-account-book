@@ -1,0 +1,23 @@
+.window{
+  display: flex;
+  min-width: 100%;
+  margin: 0;
+}
+
+.register-bar{
+  width: 20%;
+}
+
+.main-content{
+  width: 80%;
+  margin-top: 2px;
+}
+
+form > table {
+  margin: 0;
+  width: 100%
+}
+
+form > .main-table{
+  color: red;
+}

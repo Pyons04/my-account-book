@@ -1,0 +1,18 @@
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+.login-card{
+  max-width: 30%;
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+}
+
+.login{
+  display: flex;
+  flex-direction: column;
+}
+
+.window {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

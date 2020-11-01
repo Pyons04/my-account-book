@@ -1,0 +1,37 @@
+{
+  "AAAAAAABBBBBBCCCCCC":{
+    "name":"Myname Comehere",
+    "email":"thisisemail@google.com",
+    "startDate":"2020/10/22",
+    "categories":{
+      "CCCCCDDDDDDEEEEEE":{
+         "name":"光熱費",
+         "description":"水道代・電気代・ガス代など",
+         "createdDate":"2020/10/11",
+         "categoryId":1
+      },
+      "FFFFFFGGGGGGHHHII":{
+        "name":"家賃",
+        "description":"管理費を含む",
+        "createdDate":"2020/10/11",
+        "categoryId":2
+      }
+    },
+    "transactions": {
+      "FFFFFFGGGGHHHHIIII":{
+        "categoryID": 1,
+        "descriptions":"スーパーで買ったお惣菜・野菜・牛乳等",
+        "price": 3000,
+        "reaplizationDate":"2020/10/10",
+        "createdDate":"2020/10/11"
+      },
+      "JJJJJKKKKLLLMMNN":{
+        "categoryID": 2,
+        "descriptions":"スーパーで買ったお惣菜",
+        "price": 3000,
+        "reaplizationDate":"2020/10/10",
+        "createdDate":"2020/10/11"
+      }
+    }
+  }
+}

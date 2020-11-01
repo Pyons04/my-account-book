@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "my-account-book-bfdeb": {
+      "hosting": {
+        "my-account-book": [
+          "my-account-book-bfdeb"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,71 @@
+<div class="register">
+<mat-card class="transaction-card">
+  <div *ngIf="categoriesService">
+    <form (ngSubmit)="addTransaction()" >
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Add New Transaction</mat-card-title>
+        <mat-card-subtitle>出費の新規登録</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <!-- 費用 -->
+        <mat-form-field class="example-full-width">
+          <mat-label>Price</mat-label>
+          <input matInput [(ngModel)]="price"  name="price" placeholder="JPN(YEN)">
+        </mat-form-field>
+        <!-- 発生日 -->
+        <mat-form-field class="example-full-width">
+          <mat-label>Choose a date</mat-label>
+          <input matInput [matDatepicker]="picker" ngDefaultControl [(ngModel)]="realizationDate" name="realizationDate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <!-- 概要説明 -->
+        <mat-form-field class="example-full-width">
+          <mat-label>Description</mat-label>
+          <textarea matInput [(ngModel)]="description" name="description"></textarea>
+        </mat-form-field>
+        <!-- カテゴリ選択 -->
+        <mat-form-field class="example-full-width">
+          <mat-label>Category</mat-label>
+          <input matInput name="text"><br>
+            <mat-select [(ngModel)]="categoryKey" name="categoryKey">
+              <mat-option *ngFor="let item of categoriesService.categories" [value]="item.key">{{ item.name }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+        <!-- 支出レコード作成ボタン -->
+        <button mat-button><input type="submit" value="Create"></button>
+      </mat-card-actions>
+    </form>
+    </div>
+</mat-card>
+
+<mat-card class="category-card">
+  <form (ngSubmit)="addCategory()" >
+  <mat-card-header>
+    <mat-card-title>Add New Category</mat-card-title>
+    <mat-card-subtitle>出費カテゴリの新規登録</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <!-- カテゴリ名 -->
+    <mat-form-field class="example-full-width">
+      <mat-label>Category Title</mat-label>
+      <input matInput [(ngModel)]="name"  name="name">
+    </mat-form-field>
+    <!-- カテゴリ説明 -->
+    <mat-form-field class="example-full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput [(ngModel)]="description2" name="description"></textarea>
+    </mat-form-field>
+  </mat-card-content>
+  <mat-card-actions>
+     <!-- カテゴリレコード作成ボタン -->
+    <button mat-button>
+      <input type="submit" value="Create">
+    </button>
+  </mat-card-actions>
+</form>
+</mat-card>
+</div>
